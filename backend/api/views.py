@@ -46,7 +46,6 @@ def signup(request):
 def signin(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    # print("here")
     user = authenticate(username=username, password=password)
     if user:
         refresh = RefreshToken.for_user(user)
@@ -74,7 +73,7 @@ def fetch_jobs(request):
 def add_job(request):
     import re
     from datetime import datetime
-    print("here1")
+    # print("here1")
 
     def camel_to_snake(name):
         if '_' in name:
@@ -93,7 +92,7 @@ def add_job(request):
             "date": datetime.utcnow().isoformat()
         }]
 
-    print("Received:", data)
+    # print("Received:", data)
 
     # Now it's safe to validate required fields
     required_fields = ['job_name', 'customer_name', 'contact_number', 'total_amount', 'advanced_amount', 'job_details', 'time_stamps']
@@ -166,7 +165,7 @@ def delete_old_paid_jobs(request):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def delete_job_by_id(request, job_id):
-    print("here3")
+    # print("here3")
     try:
         job = Job.objects.get(id=job_id)
         job.delete()
