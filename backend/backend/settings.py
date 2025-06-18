@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +45,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken', 
     'api', 
 ]
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+}
 
 from datetime import timedelta
 
@@ -153,3 +160,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 TIME_ZONE = 'Asia/Kolkata'
 USE_TZ = False  # ⚠️ This is important to use naive datetimes in local time
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
